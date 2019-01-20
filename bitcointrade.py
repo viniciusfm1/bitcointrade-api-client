@@ -23,4 +23,11 @@ class Bitcointrade:
         return response.json()
 
     def orders(self, method='orders'):
+        
+        """Retorna lista de ordens ativas atualmente no book de ofertas"""
+
+        response = requests.get(self.url.format(versao = self.versao, par = self.par, method = method))
+        return response.json()
+
+    def trades(self, method = 'trades'):
         pass
