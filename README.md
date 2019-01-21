@@ -2,7 +2,7 @@
 Módulo python para conexão com a API da exchange Bitcoin Trade
 
 ![](https://img.shields.io/github/license/viniciusfm1/bitcointrade-api-client.svg)
-![nnn](https://img.shields.io/twitter/url/https/github.com/viniciusfm1/bitcointrade-api-client.svg?style=social)
+![](https://img.shields.io/github/issues/viniciusfm1/bitcointrade-api-client.svg)
 
 ## Referências
 - [API](https://apidocs.bitcointrade.com.br/)
