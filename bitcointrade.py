@@ -41,3 +41,6 @@ class Bitcointrade:
         response = requests.get(self.url.format(versao = self.versao, par = self.par, method = method, 
         start_time = start_time, end_time = end_time, page_size = page_size))
         return response.url
+
+    def balance(self):
+        pass
