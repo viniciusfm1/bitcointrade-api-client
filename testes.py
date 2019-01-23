@@ -28,5 +28,13 @@ if orders['message'] == None:
         print(bids[i])
 
 print('# TRADES #------------------------------')
-print(trades)
+if trades['message'] == None:
+    trades = trades['data']['trades']
+    print('mostrar execuções de compra')
+    for trade in trades:
+        if trade['type'] == 'buy':
+            print(trade['amount'],'@',trade['unit_price'])
+            print(trade['date'])
+            print('______________________')
+
 
