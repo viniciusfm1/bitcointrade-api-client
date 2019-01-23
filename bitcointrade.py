@@ -36,7 +36,6 @@ class Bitcointrade:
 
         start_time = datetime.datetime.now()
         end_time = datetime.datetime.now()
-        
 
         response = requests.get(self.url.format(versao = self.versao, par = self.par, method = method, 
         start_time = start_time, end_time = end_time, page_size = 1))
