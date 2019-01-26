@@ -16,6 +16,10 @@ class Bitcointrade:
         self.url = 'https://api.bitcointrade.com.br/v2/public/{par}/{method}/'
         self.privateUrl = 'https://api.bitcointrade.com.br/v2'
         self.apitoken = apitoken
+        self.headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'ApiToken {apitoken}'.format(apitoken = self.apitoken)
+        }
 
     def ticker(self, method='ticker'):
         
@@ -46,7 +50,13 @@ class Bitcointrade:
 
         """Lista de carteiras e saldos"""
 
-        headers = {'Authorization': 'ApiToken {apitoken}'.format(apitoken = self.apitoken)}
-        response = requests.get(self.privateUrl + '/wallets/balance', headers = headers)
+        response = requests.get(self.privateUrl + '/wallets/balance', headers = self.headers)
         return response.json()
         
+    def estimate(self, amount, typeorder):
+        
+        """Retorna o preço estimado de uma determinada quantidade de moeda"""
+
+        response = requests.get(self.privateUrl + '/market/estimated_price?amount={amount}&pair={par}&type={typeorder}'.format(
+            amount = amount, par = self.par, typeorder = typeorder), headers = self.headers)
+        return response.json()
