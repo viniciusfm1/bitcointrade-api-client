@@ -11,23 +11,24 @@ import requests
 import datetime
 
 class Bitcointrade:
-    def __init__(self, versao,par):
-        self.versao = versao
+    def __init__(self, par, apitoken):
         self.par = par
-        self.url = 'https://api.bitcointrade.com.br/{versao}/public/{par}/{method}/'
-    
+        self.url = 'https://api.bitcointrade.com.br/v2/public/{par}/{method}/'
+        self.privateUrl = 'https://api.bitcointrade.com.br/v2'
+        self.apitoken = apitoken
+
     def ticker(self, method='ticker'):
         
         """Retorna informações com o resumo das últimas 24 horas de negociações."""
 
-        response = requests.get(self.url.format(versao = self.versao, par = self.par, method = method))
+        response = requests.get(self.url.format(par = self.par, method = method))
         return response.json()
 
     def orders(self, method='orders'):
         
         """Retorna lista de ordens ativas atualmente no book de ofertas"""
 
-        response = requests.get(self.url.format(versao = self.versao, par = self.par, method = method))
+        response = requests.get(self.url.format(par = self.par, method = method))
         return response.json()
 
     def trades(self, method = 'trades?start_time={start_time}&end_time={end_time}&page_size={page_size}&current_page=1'):
@@ -37,9 +38,12 @@ class Bitcointrade:
         start_time = datetime.datetime.now()
         end_time = datetime.datetime.now()
 
-        response = requests.get(self.url.format(versao = self.versao, par = self.par, method = method, 
+        response = requests.get(self.url.format(par = self.par, method = method, 
         start_time = start_time, end_time = end_time, page_size = 1))
-        return response.json()
+        return response.url
 
     def balance(self):
-        pass
+        headers = {'Authorization': 'ApiToken {apitoken}'.format(apitoken = self.apitoken)}
+        response = requests.get(self.privateUrl + '/wallets/balance', headers = headers)
+        return response.json()
+        
