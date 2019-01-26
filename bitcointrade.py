@@ -43,6 +43,9 @@ class Bitcointrade:
         return response.url
 
     def balance(self):
+
+        """Lista de carteiras e saldos"""
+
         headers = {'Authorization': 'ApiToken {apitoken}'.format(apitoken = self.apitoken)}
         response = requests.get(self.privateUrl + '/wallets/balance', headers = headers)
         return response.json()
