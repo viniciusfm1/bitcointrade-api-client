@@ -8,7 +8,6 @@ Vinícius Machado <viniciusfm1@outlook.com>
 """
 
 import requests
-import datetime
 
 class Bitcointrade:
     def __init__(self, market, apitoken):
@@ -23,7 +22,7 @@ class Bitcointrade:
             'Authorization': 'ApiToken {apitoken}'.format(apitoken = self.apitoken)
         }
 
-    def post(self):
+    def post(self, data):
         pass
 
     def get(self, command):
@@ -65,6 +64,6 @@ class Bitcointrade:
     def createOrder(self, command, amount, price):
         """Cria uma ordem de compra ou venda"""
 
-        data = {'pair': self.par, 'type': command, 'subtype': 'market', 'amount': amount, 'unit_price': price, 'request_price': amount * price }
+        data = {'pair': self.market, 'type': command, 'subtype': 'market', 'amount': amount, 'unit_price': price, 'request_price': amount * price }
         response = requests.post(self.privateUrl + '/market/create_order', data = data, headers = self.headers)
         return response.json()
