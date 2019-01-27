@@ -11,29 +11,34 @@ import requests
 import datetime
 
 class Bitcointrade:
-    def __init__(self, par, apitoken):
-        self.par = par
+    def __init__(self, market, apitoken):
+        self.par = market
+        self.market = market
         self.url = 'https://api.bitcointrade.com.br/v2/public/{par}/{method}/'
         self.privateUrl = 'https://api.bitcointrade.com.br/v2'
+        self.publicUrl = 'https://api.bitcointrade.com.br/v2/public/{market}/{command}/'
         self.apitoken = apitoken
         self.headers = {
             'Content-Type': 'application/json',
             'Authorization': 'ApiToken {apitoken}'.format(apitoken = self.apitoken)
         }
 
-    def ticker(self, method='ticker'):
-        
+    def post(self):
+        pass
+
+    def get(self, command):
+        response = requests.get(self.publicUrl.format(market = self.market, command = command))
+        return response.json()
+
+    def ticker(self):
         """Retorna informações com o resumo das últimas 24 horas de negociações."""
+        command = 'ticker'
+        return self.get(command)
 
-        response = requests.get(self.url.format(par = self.par, method = method))
-        return response.json()
-
-    def orders(self, method='orders'):
-        
+    def orders(self):
         """Retorna lista de ordens ativas atualmente no book de ofertas"""
-
-        response = requests.get(self.url.format(par = self.par, method = method))
-        return response.json()
+        command = 'orders'
+        return self.get(command)
 
     def trades(self, method = 'trades?start_time={start_time}&end_time={end_time}&page_size={page_size}&current_page=1'):
         
