@@ -40,16 +40,12 @@ class Bitcointrade:
         command = 'orders'
         return self.get(command)
 
-    def trades(self, method = 'trades?start_time={start_time}&end_time={end_time}&page_size={page_size}&current_page=1'):
-        
+    def trades(self, start_time, end_time, page_size):
         """Retorna lista de trades baseados nos critérios de pesquisa"""
-
-        start_time = datetime.datetime.now()
-        end_time = datetime.datetime.now()
-
-        response = requests.get(self.url.format(par = self.par, method = method, 
-        start_time = start_time, end_time = end_time, page_size = 1))
-        return response.url
+        command = 'trades?start_time={start_time}&end_time={end_time}&page_size={page_size}&current_page=1'.format(
+            start_time = start_time, end_time = end_time, page_size = page_size
+        )
+        return self.get()
 
     def balance(self):
 
