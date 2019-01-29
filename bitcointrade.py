@@ -52,7 +52,14 @@ class Bitcointrade:
 
         response = requests.get(self.privateUrl + '/wallets/balance', headers = self.headers)
         return response.json()
-        
+
+    def bookOrders(self):
+        """Retorna informações das ordens de compra e venda e executadas 
+        do livro de ofertas de uma determinada moeda"""
+
+        response = requests.get(self.privateUrl + '/market?pair={pair}'.format(self.market), headers = self.headers)
+        return response.json() 
+
     def estimate(self, amount, typeorder):
         
         """Retorna o preço estimado de uma determinada quantidade de moeda"""
