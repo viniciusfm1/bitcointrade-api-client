@@ -11,9 +11,7 @@ import requests
 
 class Bitcointrade:
     def __init__(self, market, apitoken):
-        self.par = market
         self.market = market
-        self.url = 'https://api.bitcointrade.com.br/v2/public/{par}/{method}/'
         self.privateUrl = 'https://api.bitcointrade.com.br/v2'
         self.publicUrl = 'https://api.bitcointrade.com.br/v2/public/{market}/{command}/'
         self.apitoken = apitoken
@@ -44,10 +42,9 @@ class Bitcointrade:
         command = 'trades?start_time={start_time}&end_time={end_time}&page_size={page_size}&current_page=1'.format(
             start_time = start_time, end_time = end_time, page_size = page_size
         )
-        return self.get()
+        return self.get(command)
 
     def balance(self):
-
         """Lista de carteiras e saldos"""
 
         response = requests.get(self.privateUrl + '/wallets/balance', headers = self.headers)
@@ -64,8 +61,8 @@ class Bitcointrade:
         
         """Retorna o preço estimado de uma determinada quantidade de moeda"""
 
-        response = requests.get(self.privateUrl + '/market/estimated_price?amount={amount}&pair={par}&type={typeorder}'.format(
-            amount = amount, par = self.par, typeorder = typeorder), headers = self.headers)
+        response = requests.get(self.privateUrl + '/market/estimated_price?amount={amount}&pair={pair}&type={typeorder}'.format(
+            amount = amount, pair = self.market, typeorder = typeorder), headers = self.headers)
         return response.json()
 
     def createOrder(self, command, amount, price):
