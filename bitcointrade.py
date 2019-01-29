@@ -57,6 +57,12 @@ class Bitcointrade:
         response = requests.get(self.privateUrl + '/market?pair={pair}'.format(self.market), headers = self.headers)
         return response.json() 
 
+    def summary(self):
+        """Retorna o resumo de uma moeda nas últimas 24 horas"""
+
+        response = requests.get(self.privateUrl + '/market/summary?pair={pair}'.format(self.market), headers = self.headers)
+        return response.json()
+
     def estimate(self, amount, typeorder):
         
         """Retorna o preço estimado de uma determinada quantidade de moeda"""
@@ -71,3 +77,14 @@ class Bitcointrade:
         data = {'pair': self.market, 'type': command, 'subtype': 'market', 'amount': amount, 'unit_price': price, 'request_price': amount * price }
         response = requests.post(self.privateUrl + '/market/create_order', data = data, headers = self.headers)
         return response.json()
+
+    def cancelOrder(self, orderId):
+        """Cancela uma ordem de compra ou venda"""
+        
+        data = {'id': orderId}
+        response = requests.delete(self.privateUrl + '/market/user_orders', data = data, headers = self.headers)
+        return response.json()
+
+    
+        
+
