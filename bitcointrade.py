@@ -78,13 +78,17 @@ class Bitcointrade:
         response = requests.post(self.privateUrl + '/market/create_order', data = data, headers = self.headers)
         return response.json()
 
+  def user_orders(self, status, start_date, end_date, pair, type_order):
+        """Retorna informações das ordens de compra e venda do usuário"""
+        
+        response = requests.get(self.privateUrl + '/market/user_orders/list?status={status}&start_date={start_date}&end_date={end_date}&pair={pair}&type={type}&page_size=50'.format(
+            status = status, start_date = start_date, end_date = end_date, pair = self.market, type = type_order), headers = self.headers)
+        return response.json()
+
     def cancel_order(self, orderId):
         """Cancela uma ordem de compra ou venda"""
         
         data = {'id': orderId}
         response = requests.delete(self.privateUrl + '/market/user_orders', data = data, headers = self.headers)
         return response.json()
-
-    
-        
 
