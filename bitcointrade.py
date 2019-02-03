@@ -50,7 +50,7 @@ class Bitcointrade:
         response = requests.get(self.privateUrl + '/wallets/balance', headers = self.headers)
         return response.json()
 
-    def bookOrders(self):
+    def book_orders(self):
         """Retorna informações das ordens de compra e venda e executadas 
         do livro de ofertas de uma determinada moeda"""
 
@@ -71,14 +71,14 @@ class Bitcointrade:
             amount = amount, pair = self.market, typeorder = typeorder), headers = self.headers)
         return response.json()
 
-    def createOrder(self, command, amount, price):
+    def create_order(self, command, amount, price):
         """Cria uma ordem de compra ou venda"""
 
         data = {'pair': self.market, 'type': command, 'subtype': 'market', 'amount': amount, 'unit_price': price, 'request_price': amount * price }
         response = requests.post(self.privateUrl + '/market/create_order', data = data, headers = self.headers)
         return response.json()
 
-    def cancelOrder(self, orderId):
+    def cancel_order(self, orderId):
         """Cancela uma ordem de compra ou venda"""
         
         data = {'id': orderId}
