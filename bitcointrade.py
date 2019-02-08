@@ -25,6 +25,7 @@ class Bitcointrade:
 
     def get(self, command):
         response = requests.get(self.publicUrl.format(market = self.market, command = command))
+        response.close()
         return response.json()
 
     def ticker(self):
