@@ -4,6 +4,7 @@ Comunicação com a Exchange de criptomoedas Bitcoin Trade através da sua API
 Vinícius Machado <viniciusfm1@outlook.com>
 
     Referências:
+        https://bitcointrade.com.br/
         https://apidocs.bitcointrade.com.br/
 """
 
