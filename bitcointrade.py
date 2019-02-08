@@ -17,7 +17,6 @@ class Bitcointrade:
         self.publicUrl = 'https://api.bitcointrade.com.br/v2/public/{market}/{command}/'
         self.apitoken = apitoken
         self.headers = {
-            'Content-Type': 'application/json',
             'Authorization': 'ApiToken {apitoken}'.format(apitoken = self.apitoken)
         }
 
