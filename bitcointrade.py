@@ -28,7 +28,7 @@ class Bitcointrade:
         response.close()
         return response.json()
 
-    def ticker(self, param1):
+    def ticker(self):
         """Retorna informações com o resumo das últimas 24 horas de negociações."""
         command = 'ticker'
         return self.get(command)
