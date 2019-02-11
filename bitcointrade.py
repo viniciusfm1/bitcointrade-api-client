@@ -90,3 +90,9 @@ class Bitcointrade:
         response = requests.delete(self.privateUrl + '/market/user_orders', data = data, headers = self.headers)
         return response.json()
 
+    def withdraw_fee_estimate(self, type_fee, amount, coin):
+        """Retorna informações do fee estimado."""
+
+        data = {'name': type_fee, 'amount': amount}
+        response = requests.get(self.privateUrl + '/{coin}/withdraw/fee'.format(coin = coin), data =data, headers = headers)
+        return response.json()
