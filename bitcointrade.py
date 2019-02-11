@@ -90,9 +90,16 @@ class Bitcointrade:
         response = requests.delete(self.privateUrl + '/market/user_orders', data = data, headers = self.headers)
         return response.json()
 
-    def withdraw_fee_estimate(self, type_fee, amount, coin):
+    def withdraw_fee_estimate(self, fee_type, amount, coin):
         """Retorna informações do fee estimado."""
 
-        data = {'name': type_fee, 'amount': amount}
-        response = requests.get(self.privateUrl + '/{coin}/withdraw/fee'.format(coin = coin), data =data, headers = headers)
+        data = {'name': fee_type, 'amount': amount}
+        response = requests.get(self.privateUrl + '/{coin}/withdraw/fee'.format(coin = coin), data =data, headers = self.headers)
+        return response.json()
+
+    def create_withdraw(self, destination, fee_type, amount, coin):
+        """Cria uma requisição de saque, a carteira de destino deve estar autorizada na plataforma"""
+
+        data = {'destination': destination, 'fee_type': fee_type, 'amount': amount}
+        response = requests.post(self.privateUrl + '/{coin}/withdraw'.format(coin = coin), data = data, headers = self.headers)
         return response.json()
