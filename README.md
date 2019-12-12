@@ -6,6 +6,3 @@ Script python para conexão com a API da exchange [Bitcoin Trade](https://bitcoi
 
 ### Referências
 - [API](https://apidocs.bitcointrade.com.br/)
-### Pague-me um café
-[![Donate with Litecoin](https://en.cryptobadges.io/badge/big/LTqYrYTC8yHvmkLSsfQ4AidLiYF593mUXZ)](https://en.cryptobadges.io/donate/LTqYrYTC8yHvmkLSsfQ4AidLiYF593mUXZ)
-
