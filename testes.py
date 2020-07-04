@@ -2,9 +2,9 @@ from bitcointrade import Bitcointrade
 
 exchange = Bitcointrade('brlltc','apitoken')
 
-book_orders = exchange.book_orders()
+ticker = exchange.ticker()
 
-print(book_orders)
+print(ticker)
 
 
 
