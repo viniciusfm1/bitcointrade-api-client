@@ -53,13 +53,12 @@ class Bitcointrade:
     def book_orders(self):
         """Retorna informações das ordens de compra e venda e executadas do livro de ofertas de uma determinada moeda."""
 
-        response = requests.get(self.privateUrl + '/market?pair={pair}'.format(pair = self.market),headers = self.headers)
+        response = requests.get(self.privateUrl + '/market/summary?pair={}'.format(self.market),headers = self.headers)
         return response.json() 
 
     def summary(self):
         """Retorna o resumo de uma moeda nas últimas 24 horas."""
-
-        response = requests.get(self.privateUrl + '/market/summary?pair={pair}'.format(self.market), headers = self.headers)
+        response = requests.get(self.privateUrl + '/market/summary?pair={}'.format(self.market), headers = self.headers)
         return response.json()
 
     def estimated_price(self, amount, typeorder):
