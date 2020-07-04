@@ -63,7 +63,7 @@ class Bitcointrade:
         return response.json()
 
     def estimated_price(self, amount, typeorder):
-        """Retorna o preço estimado de uma determinada quantidade de moeda."""
+        """Retorna o preço unitário estimado de uma determinada quantidade caso ela fosse executada a mercado."""
 
         response = requests.get(self.privateUrl + '/market/estimated_price?amount={amount}&pair={pair}&type={typeorder}'.format(
             amount = amount, pair = self.market, typeorder = typeorder), headers = self.headers)
