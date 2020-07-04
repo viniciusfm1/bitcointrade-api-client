@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Comunicação com a Exchange de criptomoedas Bitcoin Trade através da sua API
-Vinícius Machado <viniciusfm1@outlook.com>
 
     Referências:
         https://bitcointrade.com.br/
@@ -13,11 +12,11 @@ import requests
 class Bitcointrade:
     def __init__(self, market, apitoken):
         self.market = market
-        self.privateUrl = 'https://api.bitcointrade.com.br/v2'
-        self.publicUrl = 'https://api.bitcointrade.com.br/v2/public/{market}/{command}/'
+        self.privateUrl = 'https://api.bitcointrade.com.br/v3'
+        self.publicUrl = 'https://api.bitcointrade.com.br/v3/public/{market}/{command}/'
         self.apitoken = apitoken
         self.headers = {
-            'Authorization': 'ApiToken {apitoken}'.format(apitoken = self.apitoken)
+            'x-api-key': '{apitoken}'.format(apitoken = self.apitoken)
         }
 
     def post(self, data):
@@ -54,17 +53,16 @@ class Bitcointrade:
     def book_orders(self):
         """Retorna informações das ordens de compra e venda e executadas do livro de ofertas de uma determinada moeda."""
 
-        response = requests.get(self.privateUrl + '/market?pair={pair}'.format(pair = self.market),headers = self.headers)
+        response = requests.get(self.privateUrl + '/market/summary?pair={}'.format(self.market),headers = self.headers)
         return response.json() 
 
     def summary(self):
         """Retorna o resumo de uma moeda nas últimas 24 horas."""
-
-        response = requests.get(self.privateUrl + '/market/summary?pair={pair}'.format(self.market), headers = self.headers)
+        response = requests.get(self.privateUrl + '/market/summary?pair={}'.format(self.market), headers = self.headers)
         return response.json()
 
     def estimated_price(self, amount, typeorder):
-        """Retorna o preço estimado de uma determinada quantidade de moeda."""
+        """Retorna o preço unitário estimado de uma determinada quantidade caso ela fosse executada a mercado."""
 
         response = requests.get(self.privateUrl + '/market/estimated_price?amount={amount}&pair={pair}&type={typeorder}'.format(
             amount = amount, pair = self.market, typeorder = typeorder), headers = self.headers)
