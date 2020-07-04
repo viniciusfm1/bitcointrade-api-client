@@ -1,6 +1,6 @@
 from bitcointrade import Bitcointrade
 
-exchange = Bitcointrade('brlltc','apitoken')
+exchange = Bitcointrade('BRLLTC','apitoken')
 
 ticker = exchange.ticker()
 

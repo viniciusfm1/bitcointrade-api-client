@@ -13,8 +13,8 @@ import requests
 class Bitcointrade:
     def __init__(self, market, apitoken):
         self.market = market
-        self.privateUrl = 'https://api.bitcointrade.com.br/v2'
-        self.publicUrl = 'https://api.bitcointrade.com.br/v2/public/{market}/{command}/'
+        self.privateUrl = 'https://api.bitcointrade.com.br/v3'
+        self.publicUrl = 'https://api.bitcointrade.com.br/v3/public/{market}/{command}/'
         self.apitoken = apitoken
         self.headers = {
             'Authorization': 'ApiToken {apitoken}'.format(apitoken = self.apitoken)
