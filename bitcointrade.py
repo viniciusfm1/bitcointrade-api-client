@@ -16,7 +16,7 @@ class Bitcointrade:
         self.publicUrl = 'https://api.bitcointrade.com.br/v3/public/{market}/{command}/'
         self.apitoken = apitoken
         self.headers = {
-            'Authorization': 'ApiToken {apitoken}'.format(apitoken = self.apitoken)
+            'x-api-key': '{apitoken}'.format(apitoken = self.apitoken)
         }
 
     def post(self, data):
