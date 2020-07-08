@@ -68,10 +68,10 @@ class Bitcointrade:
             amount = amount, pair = self.market, typeorder = typeorder), headers = self.headers)
         return response.json()
 
-    def create_order(self, command, amount, price):
+    def create_order(self, type_order, subtype, amount, unit_price):
         """Cria uma ordem de compra ou venda."""
 
-        data = {'pair': self.market, 'type': command, 'subtype': 'limited', 'amount': amount, 'unit_price': price, 'request_price': amount * price }
+        data = {'pair': self.market, 'type': type_order, 'subtype': subtype, 'amount': amount, 'unit_price': unit_price}
         response = requests.post(self.privateUrl + '/market/create_order', data = data, headers = self.headers)
         return response.json()
 
